@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     public GameObject effectPrefab;
     public Transform effectGroup;
 
+    public AudioSource bgmPlayer;
+    public AudioSource[] sfxPlayer;
+    public AudioClip[] sfxClip;
+    public enum Sfx { LevelUp, Next, Attach, Button, Over };
+    int sfxCursor;
+
     public int score;
     public int maxLevel;
     public bool isOver;
@@ -24,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bgmPlayer.Play();
         NextBall();
     }
     Ball GetBall()
@@ -53,6 +60,7 @@ public class GameManager : MonoBehaviour
         lastBall.level = Random.Range(0, maxLevel); //마지막 값은 포함이 안된다 그러므로 8.
         lastBall.gameObject.SetActive(true);
 
+        SfxPlay(Sfx.Next);
         StartCoroutine("WaitNext");  //코르틴 호출.
         //특강에선 추적이 불가능하기 때문에 스트링을 지양하라고 했는데?
     }
@@ -113,6 +121,37 @@ public class GameManager : MonoBehaviour
             balls[index].Hide(Vector3.up * 100);
             yield return new WaitForSeconds(0.1f);
         }
+
+        yield return new WaitForSeconds(1f);
+
+        SfxPlay(Sfx.Over);
+    }
+
+    public void SfxPlay(Sfx type)
+    {
+        switch(type)
+        {
+            case Sfx.LevelUp:
+                sfxPlayer[sfxCursor].clip = sfxClip[Random.Range(0, 3)];
+                break;
+            case Sfx.Next:
+                sfxPlayer[sfxCursor].clip = sfxClip[3];
+                break;
+            case Sfx.Attach:
+                sfxPlayer[sfxCursor].clip = sfxClip[4];
+                break;
+            case Sfx.Button:
+                sfxPlayer[sfxCursor].clip = sfxClip[5];
+                break;
+            case Sfx.Over:
+                sfxPlayer[sfxCursor].clip = sfxClip[6];
+                break;
+
+        }
+
+        sfxPlayer[sfxCursor].Play();
+        sfxCursor = (sfxCursor+1) % sfxPlayer.Length;
+
     }
 
 }
