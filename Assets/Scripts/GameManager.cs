@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball lastBall;
+
     public GameObject ballPrefab;
     public Transform ballGroup;
+    public List<Ball> ballPool;
+
     public GameObject effectPrefab;
     public Transform effectGroup;
+    public List<ParticleSystem> effectPool;
+
+    [Range(1, 30)]
+    public int poolSize;
+    public int poolCursor;
+    public Ball lastBall;
 
     public AudioSource bgmPlayer;
     public AudioSource[] sfxPlayer;
@@ -23,6 +31,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
+
+        ballPool = new List<Ball>();
+        effectPool = new List<ParticleSystem>();
+        for(int index = 0; index < poolSize; index++)
+        {
+            MakeBall();
+        }
     }
     //유니티 또는 C# 에서 프레임을 고정시킬 수 있다.
     //하지만 번거롭기 때문에 코드로 고정시킨다. 이번엔 대깨코 승!
@@ -33,18 +48,37 @@ public class GameManager : MonoBehaviour
         bgmPlayer.Play();
         NextBall();
     }
-    Ball GetBall()
+
+    Ball MakeBall()
     {
         //Effect 생성
         GameObject instantEffectObj = Instantiate(effectPrefab, effectGroup);
+        instantEffectObj.name = "Effect" + effectPool.Count;
         ParticleSystem instantEffect = instantEffectObj.GetComponent<ParticleSystem>();
+        effectPool.Add(instantEffect);
+        //오브젝트 풀링(ObjectPooling) : 미리 생성해둔 오브젝트 재활용
 
         //Ball 생성
-        GameObject instantBallObj = Instantiate(ballPrefab,ballGroup);
+        GameObject instantBallObj = Instantiate(ballPrefab, ballGroup);
+        instantBallObj.name = "Ball" + ballPool.Count;
         Ball instantBall = instantBallObj.GetComponent<Ball>();
+        instantBall.manager = this;
         instantBall.effect = instantEffect;
-        return instantBall;
+        ballPool.Add(instantBall);
 
+        return instantBall;
+    }
+    Ball GetBall()
+    {
+        for(int index = 0; index < ballPool.Count; index++)
+        {
+            poolCursor =  (poolCursor+1) % ballPool.Count;
+            if (!ballPool[poolCursor].gameObject.activeSelf)
+            {
+                return ballPool[poolCursor];
+            }
+        }
+        return MakeBall();
     }
 
     void NextBall()
@@ -54,9 +88,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        Ball newball = GetBall();
-        lastBall = newball;
-        lastBall.manager = this;
+
+        lastBall = GetBall();
         lastBall.level = Random.Range(0, maxLevel); //마지막 값은 포함이 안된다 그러므로 8.
         lastBall.gameObject.SetActive(true);
 

@@ -348,11 +348,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bc9000a4261e94f8d587c6f0725b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastBall: {fileID: 0}
   ballPrefab: {fileID: 4961656447520762815, guid: 5381e9de36b40ad44ae30e8410116b78, type: 3}
   ballGroup: {fileID: 781549067}
+  ballPool: []
   effectPrefab: {fileID: 8417412080578210323, guid: b9da5d20ac6b18c44b363ff0d3c27743, type: 3}
   effectGroup: {fileID: 1229033606}
+  effectPool: []
+  poolSize: 3
+  poolCursor: 0
+  lastBall: {fileID: 0}
   bgmPlayer: {fileID: 1101946530}
   sfxPlayer:
   - {fileID: 2078167466}
