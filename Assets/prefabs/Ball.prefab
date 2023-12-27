@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   isDrag: 1
+  isMerge: 0
 --- !u!95 &7873187112351540755
 Animator:
   serializedVersion: 5

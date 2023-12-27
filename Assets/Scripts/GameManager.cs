@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
     public Ball lastBall;
     public GameObject ballPrefab;
     public Transform ballGroup;
-
-
+    public GameObject effectPrefab;
+    public Transform effectGroup;
+    public int maxLevel;
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -23,9 +24,15 @@ public class GameManager : MonoBehaviour
     }
     Ball GetBall()
     {
-        GameObject instant = Instantiate(ballPrefab,ballGroup);
-        Ball instantball = instant.GetComponent<Ball>();
-        return instantball;
+        //Effect 생성
+        GameObject instantEffectObj = Instantiate(effectPrefab, effectGroup);
+        ParticleSystem instantEffect = instantEffectObj.GetComponent<ParticleSystem>();
+
+        //Ball 생성
+        GameObject instantBallObj = Instantiate(ballPrefab,ballGroup);
+        Ball instantBall = instantBallObj.GetComponent<Ball>();
+        instantBall.effect = instantEffect;
+        return instantBall;
 
     }
 
@@ -33,7 +40,8 @@ public class GameManager : MonoBehaviour
     {
         Ball newball = GetBall();
         lastBall = newball;
-        lastBall.level = Random.Range(0, 8); //마지막 값은 포함이 안된다 그러므로 8.
+        lastBall.manager = this;
+        lastBall.level = Random.Range(0, maxLevel); //마지막 값은 포함이 안된다 그러므로 8.
         lastBall.gameObject.SetActive(true);
 
         StartCoroutine("WaitNext");  //코르틴 호출.

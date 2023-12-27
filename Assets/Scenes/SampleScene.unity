@@ -223,6 +223,9 @@ MonoBehaviour:
   lastBall: {fileID: 0}
   ballPrefab: {fileID: 4961656447520762815, guid: 5381e9de36b40ad44ae30e8410116b78, type: 3}
   ballGroup: {fileID: 781549067}
+  effectPrefab: {fileID: 8417412080578210323, guid: b9da5d20ac6b18c44b363ff0d3c27743, type: 3}
+  effectGroup: {fileID: 1229033606}
+  maxLevel: 2
 --- !u!4 &179602158
 Transform:
   m_ObjectHideFlags: 0
@@ -771,6 +774,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1229033605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229033606}
+  m_Layer: 0
+  m_Name: EffectGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1229033606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229033605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1231985916
 GameObject:
   m_ObjectHideFlags: 0
