@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7325233405376642862}
   - component: {fileID: 8567599812419356605}
   - component: {fileID: 7873187112351540755}
+  - component: {fileID: 3637989770072074984}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -21,8 +22,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &6266437462913272860
-Transform:
+--- !u!224 &6266437462913272860
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -36,6 +37,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &8831874048039675741
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -167,6 +173,7 @@ MonoBehaviour:
   level: 0
   isDrag: 1
   isMerge: 0
+  isAttach: 0
   rigid: {fileID: 0}
 --- !u!95 &7873187112351540755
 Animator:
@@ -189,3 +196,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!222 &3637989770072074984
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4961656447520762815}
+  m_CullTransparentMesh: 1
